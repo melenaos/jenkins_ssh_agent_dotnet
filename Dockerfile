@@ -8,4 +8,4 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install apt-transport-https && \
     apt-get update && \
-    apt-get install dotnet-sdk-3.1 && \
+    apt-get install dotnet-sdk-3.1
