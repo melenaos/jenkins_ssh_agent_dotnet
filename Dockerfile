@@ -9,3 +9,18 @@ RUN apt-get update && \
     apt-get install apt-transport-https && \
     apt-get update && \
     apt-get install -y --no-install-recommends  dotnet-sdk-3.1
+    
+# Speedup the dotnet tool
+ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1
+
+# Trigger the population of the local package cache
+ENV NUGET_XMLDOC_MODE skip
+RUN mkdir warmup \
+    && cd warmup \
+    && dotnet new \
+    && cd .. \
+    && rm -rf warmup \
+    && rm -rf /tmp/NuGetScratch
+### END .NET
+
