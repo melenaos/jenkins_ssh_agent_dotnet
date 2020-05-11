@@ -1,6 +1,7 @@
 FROM nikhilpathania/jenkins_ssh_agent
 
 LABEL maintainer = "Menelaos Vergis <menelaosvergis@gmail.com>"
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     wget https://packages.microsoft.com/config/ubuntu/19.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
@@ -8,8 +9,9 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install apt-transport-https && \
     apt-get update && \
-    apt-get install -y --no-install-recommends  dotnet-sdk-3.1
-    
+    apt-get install -y --no-install-recommends  dotnet-sdk-3.1 && \
+    apt-get install -y tzdata
+
 # Speedup the dotnet tool
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1
